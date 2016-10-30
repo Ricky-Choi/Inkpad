@@ -129,7 +129,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
     // Create a help button to display in the top left corner.
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", @"Help")
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(showHelp:)];
     self.navigationItem.leftBarButtonItem = leftItem;
@@ -306,8 +306,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     }
 }
 
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     if (editingThumbnail_) {
         [editingThumbnail_ stopEditing];
     }
@@ -566,7 +565,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     if ([MFMailComposeViewController canSendMail]) {
         if (!emailItem_) {
             emailItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Email", @"Email")
-                                                          style:UIBarButtonItemStyleBordered
+                                                          style:UIBarButtonItemStylePlain
                                                          target:self
                                                          action:@selector(showEmailPanel:)];
         }
@@ -576,7 +575,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     
     if (!dropboxExportItem_) {
         dropboxExportItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Dropbox", @"Dropbox")
-                                                              style:UIBarButtonItemStyleBordered
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(showDropboxExportPanel:)];
     }
@@ -606,10 +605,10 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         toolbarItems_ = [[NSMutableArray alloc] init];
         
         UIBarButtonItem *importItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
-                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                       style:UIBarButtonItemStylePlain target:self
                                                                       action:@selector(showDropboxImportPanel:)];
         UIBarButtonItem *samplesItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Samples", @"Samples")
-                                                                        style:UIBarButtonItemStyleBordered
+                                                                        style:UIBarButtonItemStylePlain
                                                                        target:self
                                                                        action:@selector(showSamplesPanel:)];
         
@@ -620,14 +619,14 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
         UIBarButtonItem *spinnerItem = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator_];
         
         activityItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Activity", @"Activity")
-                                                         style:UIBarButtonItemStyleBordered target:self
+                                                         style:UIBarButtonItemStylePlain target:self
                                                         action:@selector(showActivityPanel:)];
         
         UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Select", @"Select")
-                                                                     style:UIBarButtonItemStyleBordered
+                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(startEditing:)];
-        editItem.style = UIBarButtonItemStyleBordered;
+        editItem.style = UIBarButtonItemStylePlain;
         
         UIBarButtonItem *flexibleItem = [UIBarButtonItem flexibleItem];
         UIBarButtonItem *fixedItem = [UIBarButtonItem fixedItemWithWidth:10];

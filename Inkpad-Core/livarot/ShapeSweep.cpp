@@ -1889,7 +1889,7 @@ bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb
 	if ( jt > jb ) {float swf=jt;jt=jb;jb=swf;}
 
 	if ( il > jr || it > jb || ir < jl || ib < jt ) return false;
-
+/*
 	// pre-test
 	{
 		vec2d   sDiff,eDiff;
@@ -1924,7 +1924,7 @@ bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb
 		atL=srDot/(srDot-erDot);
 		atR=slDot/(slDot-elDot);
 		return true;
-	}
+	}*/
 
 	// a mettre en double precision pour des resultats exacts
 	vec2d  usvs;

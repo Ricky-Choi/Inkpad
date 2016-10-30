@@ -28,7 +28,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithTitle:NSLocalizedString(@"Print", @"Print")
-                                             style:UIBarButtonItemStyleBordered
+                                             style:UIBarButtonItemStylePlain
                                              target:self
                                              action:@selector(printContent:)];
     

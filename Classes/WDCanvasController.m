@@ -83,8 +83,7 @@
 #pragma mark -
 #pragma mark Interface Rotation
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [canvas_.selectionView removeFromSuperview];
     canvas_.selectionView = nil;
     
@@ -95,21 +94,17 @@
     [canvas_ showRulers:NO animated:NO];
     
     [canvas_ nixMessageLabel];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [canvas_ setVisibleRectCenterFromCached];
-    [canvas_ rotateToInterfaceOrientation];
     
-    [canvas_ showRulers:self.drawing.rulersVisible animated:NO];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [canvas_ ensureToolPaletteIsOnScreen];
-    [balanceController_ bringOnScreenAnimated:YES];
-    [hueController_ bringOnScreenAnimated:YES];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [canvas_ ensureToolPaletteIsOnScreen];
+        [balanceController_ bringOnScreenAnimated:YES];
+        [hueController_ bringOnScreenAnimated:YES];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [canvas_ setVisibleRectCenterFromCached];
+        [canvas_ rotateToInterfaceOrientation];
+        
+        [canvas_ showRulers:self.drawing.rulersVisible animated:NO];
+    }];
 }
 
 #pragma mark -
@@ -965,17 +960,17 @@
     } 
 
     UIBarButtonItem *objectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit")
-                                                 style:UIBarButtonItemStyleBordered
+                                                 style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(showObjectMenu:)];
     
     UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Arrange", @"Arrange")
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(showArrangeMenu:)];
     
     UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Path", @"Path")
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(showPathMenu:)];
     
@@ -1018,7 +1013,7 @@
     imageButton.barButtonItem = swatchItem;
     
     layerItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Layers", @"Layers")
-                                                  style:UIBarButtonItemStyleBordered
+                                                  style:UIBarButtonItemStylePlain
                                                  target:self
                                                  action:@selector(showLayers:)];
     

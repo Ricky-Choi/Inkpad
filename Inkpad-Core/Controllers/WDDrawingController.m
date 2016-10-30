@@ -823,7 +823,8 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 
 - (void) deleteAnchors:(id)sender
 {
-    [self.selectedPaths makeObjectsPerformSelector:@selector(deleteAnchors)];
+    SEL sel = NSSelectorFromString(@"deleteAnchors");
+    [self.selectedPaths makeObjectsPerformSelector:sel];
 }
 
 - (void) reversePathDirection:(id)sender

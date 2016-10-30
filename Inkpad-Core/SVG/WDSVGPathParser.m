@@ -156,7 +156,7 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
 {
     char c = [command characterAtIndex:0];
     BOOL absolute = (c >= 'A' && c <= 'Z');
-    CGPoint to, cp1, cp2;
+    CGPoint to = CGPointZero, cp1 = CGPointZero, cp2 = CGPointZero;
     NSInteger last = NSMaxRange(range);
     switch (c) {
         case 'M':
